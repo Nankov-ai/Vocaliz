@@ -404,19 +404,18 @@ input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.2); }
   border-top: 1px solid var(--border);
   font-size: 0.78rem;
   color: var(--text-muted);
-  opacity: 0.7;
 }
 
 .footer-logo {
   width: 18px;
   height: 18px;
   object-fit: contain;
-  filter: brightness(0.7);
 }
 
 .footer-brand {
   font-weight: 600;
   letter-spacing: 0.3px;
+  color: var(--text);
 }
 
 /* ── Scrollbar ───────────────────────────────── */
