@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="420" viewBox="0 0 680 420">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&amp;display=swap');
+      .label { font-family: 'DM Mono', monospace; }
+      .caption { fill: #9a9690; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="680" height="420" fill="#ffffff"/>
+
+  <!-- ─── VARIANTE NEGATIVA (fundo escuro) ─────────────────── -->
+  <rect x="40" y="30" width="180" height="180" rx="16" fill="#0e0e0e"/>
+  <rect x="72" y="62" width="46" height="46" rx="4" fill="#f5f4f0"/>
+  <rect x="130" y="62" width="46" height="46" rx="4" fill="none" stroke="#f5f4f0" stroke-width="1.5"/>
+  <rect x="72" y="120" width="46" height="46" rx="4" fill="none" stroke="#f5f4f0" stroke-width="1.5"/>
+  <rect x="130" y="120" width="46" height="46" rx="4" fill="#00c896"/>
+  <line x1="118" y1="85" x2="130" y2="85" stroke="#f5f4f0" stroke-width="1" opacity="0.6"/>
+  <line x1="153" y1="108" x2="153" y2="120" stroke="#f5f4f0" stroke-width="1" opacity="0.6"/>
+  <text class="label caption" x="130" y="236" text-anchor="middle" font-size="11" letter-spacing="3" fill="#9a9690">NEGATIVO</text>
+
+  <!-- ─── VARIANTE POSITIVA (fundo claro) ─────────────────── -->
+  <rect x="260" y="30" width="180" height="180" rx="16" fill="#f5f4f0"/>
+  <rect x="292" y="62" width="46" height="46" rx="4" fill="#0e0e0e"/>
+  <rect x="350" y="62" width="46" height="46" rx="4" fill="none" stroke="#0e0e0e" stroke-width="1.5"/>
+  <rect x="292" y="120" width="46" height="46" rx="4" fill="none" stroke="#0e0e0e" stroke-width="1.5"/>
+  <rect x="350" y="120" width="46" height="46" rx="4" fill="#00c896"/>
+  <line x1="338" y1="85" x2="350" y2="85" stroke="#0e0e0e" stroke-width="1" opacity="0.5"/>
+  <line x1="373" y1="108" x2="373" y2="120" stroke="#0e0e0e" stroke-width="1" opacity="0.5"/>
+  <text class="label caption" x="350" y="236" text-anchor="middle" font-size="11" letter-spacing="3" fill="#9a9690">POSITIVO</text>
+
+  <!-- ─── VARIANTE ACENTO (fundo azul) ─────────────────────── -->
+  <rect x="480" y="30" width="180" height="180" rx="16" fill="#1a1aff"/>
+  <rect x="512" y="62" width="46" height="46" rx="4" fill="#ffffff"/>
+  <rect x="570" y="62" width="46" height="46" rx="4" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+  <rect x="512" y="120" width="46" height="46" rx="4" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+  <rect x="570" y="120" width="46" height="46" rx="4" fill="#00c896"/>
+  <line x1="558" y1="85" x2="570" y2="85" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <line x1="593" y1="108" x2="593" y2="120" stroke="#ffffff" stroke-width="1" opacity="0.6"/>
+  <text class="label caption" x="570" y="236" text-anchor="middle" font-size="11" letter-spacing="3" fill="rgba(255,255,255,0.5)">ACENTO</text>
+
+  <!-- ─── VERSÃO MICRO ────────────────────────────────────── -->
+  <text class="label" x="40" y="298" font-size="11" letter-spacing="3" fill="#9a9690">MICRO</text>
+
+  <!-- micro escuro -->
+  <rect x="40" y="310" width="56" height="56" rx="8" fill="#0e0e0e"/>
+  <rect x="51" y="321" width="14" height="14" rx="2" fill="#f5f4f0"/>
+  <rect x="51" y="341" width="14" height="14" rx="2" fill="none" stroke="#f5f4f0" stroke-width="1"/>
+  <rect x="71" y="321" width="14" height="14" rx="2" fill="none" stroke="#f5f4f0" stroke-width="1"/>
+  <rect x="71" y="341" width="14" height="14" rx="2" fill="#00c896"/>
+  <line x1="65" y1="328" x2="71" y2="328" stroke="#f5f4f0" stroke-width="0.8" opacity="0.6"/>
+  <line x1="78" y1="335" x2="78" y2="341" stroke="#f5f4f0" stroke-width="0.8" opacity="0.6"/>
+
+  <!-- micro claro -->
+  <rect x="110" y="310" width="56" height="56" rx="8" fill="#f5f4f0"/>
+  <rect x="121" y="321" width="14" height="14" rx="2" fill="#0e0e0e"/>
+  <rect x="121" y="341" width="14" height="14" rx="2" fill="none" stroke="#0e0e0e" stroke-width="1"/>
+  <rect x="141" y="321" width="14" height="14" rx="2" fill="none" stroke="#0e0e0e" stroke-width="1"/>
+  <rect x="141" y="341" width="14" height="14" rx="2" fill="#00c896"/>
+
+  <!-- favicon -->
+  <rect x="180" y="310" width="32" height="32" rx="6" fill="#0e0e0e"/>
+  <rect x="186" y="316" width="8" height="8" rx="1" fill="#f5f4f0"/>
+  <rect x="186" y="328" width="8" height="8" rx="1" fill="none" stroke="#f5f4f0" stroke-width="0.8"/>
+  <rect x="198" y="316" width="8" height="8" rx="1" fill="none" stroke="#f5f4f0" stroke-width="0.8"/>
+  <rect x="198" y="328" width="8" height="8" rx="1" fill="#00c896"/>
+  <text class="label caption" x="196" y="356" text-anchor="middle" font-size="10" fill="#9a9690">favicon</text>
+
+  <!-- ─── SLOGAN ─────────────────────────────────────────── -->
+  <line x1="40" y1="385" x2="640" y2="385" stroke="#e8e6e0" stroke-width="0.5"/>
+  <text class="label" x="340" y="407" text-anchor="middle" font-size="13" letter-spacing="1.5" fill="#9a9690">Simplicidade que evolui</text>
+</svg>
