@@ -42,6 +42,8 @@ body {
 .container {
   width: 100%;
   max-width: 760px;
+  min-width: 0;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
   gap: 0;
@@ -605,6 +607,10 @@ select {
   outline: none;
   cursor: pointer;
   transition: border-color 0.2s;
+  /* prevent select from overflowing its grid cell */
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
 }
 
 select:focus { border-color: var(--accent); }
@@ -716,18 +722,20 @@ input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.2); }
   color: var(--text);
 }
 
-/* Mobile-first: 1 column base, 3 columns on wider screens */
+/* Mobile-first: 1 col → 3 col on desktop */
 .settings {
   display: grid;
   grid-template-columns: 1fr;
   gap: 12px;
   padding: 12px;
   background: var(--surface);
+  /* prevent any child from blowing out the grid */
+  overflow: hidden;
 }
 
 @media (min-width: 600px) {
   .settings {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 14px;
     padding: 16px;
   }
@@ -735,10 +743,13 @@ input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.2); }
 
 .settings .full-width { grid-column: 1 / -1; }
 
+/* every grid cell can shrink to 0 */
+.setting-group { min-width: 0; }
+
 /* ── Engine selector ────────────────────────── */
 .engine-selector {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 8px;
 }
 
