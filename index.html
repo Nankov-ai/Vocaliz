@@ -3,43 +3,113 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#7c6af7" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Vocaliz" />
   <title>Vocaliz</title>
+  <link rel="manifest" href="manifest.json" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
     <header>
-      <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:4px;">
-        <img src="nodeflow_icon.svg" alt="Nodeflow" style="height:24px;width:24px;" />
-        <h1 style="margin:0;">🔊 Vocaliz</h1>
+      <div class="header-inner">
+        <img src="nodeflow_icon.svg" alt="Nodeflow" class="header-logo" />
+        <h1>Vocaliz</h1>
       </div>
-      <p class="subtitle">Cola o teu texto, carrega um ficheiro e ouve-o</p>
+      <p class="subtitle">Cola texto, carrega ficheiro, URL ou câmara — e ouve</p>
     </header>
 
     <main>
-      <!-- Upload Zone -->
-      <div class="upload-zone" id="uploadZone">
-        <input type="file" id="fileInput"
-          accept=".txt,.md,.csv,.html,.htm,.srt,.vtt,.pdf,.docx,.xlsx,.xls"
-          hidden />
-        <div class="upload-inner" id="uploadInner">
-          <span class="upload-icon">📎</span>
-          <span class="upload-text">
-            Arrasta um ficheiro ou
-            <button class="btn-link" id="btnBrowse">escolhe aqui</button>
-          </span>
-          <span class="upload-formats">txt · md · csv · html · srt · pdf · docx · xlsx</span>
+      <!-- Input mode tabs -->
+      <div class="input-tabs">
+        <button class="input-tab active" data-tab="file">📎 Ficheiro</button>
+        <button class="input-tab" data-tab="url">🔗 URL</button>
+        <button class="input-tab" data-tab="camera">📷 Câmara</button>
+        <button class="input-tab" data-tab="library">📚 Lista</button>
+      </div>
+
+      <!-- Tab: Ficheiro -->
+      <div class="tab-panel active" id="tabFile">
+        <div class="upload-zone" id="uploadZone">
+          <input type="file" id="fileInput"
+            accept=".txt,.md,.csv,.html,.htm,.srt,.vtt,.pdf,.docx,.xlsx,.xls"
+            hidden />
+          <div class="upload-inner" id="uploadInner">
+            <span class="upload-icon">📎</span>
+            <span class="upload-text">
+              Arrasta um ficheiro ou
+              <button class="btn-link" id="btnBrowse">escolhe aqui</button>
+            </span>
+            <span class="upload-formats">txt · md · csv · html · srt · pdf · docx · xlsx</span>
+          </div>
+          <div class="file-info" id="fileInfo" hidden>
+            <span class="file-icon">📄</span>
+            <span id="fileName"></span>
+            <button class="btn-remove-file" id="btnRemoveFile" title="Remover ficheiro">✕</button>
+          </div>
         </div>
-        <div class="file-info" id="fileInfo" hidden>
-          <span class="file-icon">📄</span>
-          <span id="fileName"></span>
-          <button class="btn-remove-file" id="btnRemoveFile" title="Remover ficheiro">✕</button>
+      </div>
+
+      <!-- Tab: URL -->
+      <div class="tab-panel" id="tabUrl">
+        <div class="url-panel">
+          <div class="url-row">
+            <input type="url" id="urlInput" class="url-input"
+              placeholder="https://exemplo.com/artigo..." />
+            <button class="btn-url-fetch" id="btnFetchUrl">Ir buscar</button>
+          </div>
+          <p class="url-hint">A app vai extrair o texto da página e carregá-lo para leitura.</p>
+          <div class="url-loading" id="urlLoading" hidden>
+            <div class="url-loading-bar"><div class="url-loading-fill" id="urlLoadingFill"></div></div>
+            <span id="urlLoadingText">A carregar página...</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab: Câmara / OCR -->
+      <div class="tab-panel" id="tabCamera">
+        <div class="camera-panel">
+          <input type="file" id="cameraInput"
+            accept="image/*" capture="environment" hidden />
+          <button class="btn-camera" id="btnCamera">
+            <span class="camera-icon">📷</span>
+            <span>Fotografar documento</span>
+          </button>
+          <p class="camera-hint">Abre a câmara, fotografa texto impresso e a app lê-o em voz alta.<br/>O OCR corre localmente — nenhuma imagem é enviada para servidores.</p>
+          <div class="ocr-loading" id="ocrLoading" hidden>
+            <div class="ocr-loading-bar"><div class="ocr-loading-fill" id="ocrLoadingFill"></div></div>
+            <span id="ocrLoadingText">A processar imagem...</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab: Lista de leitura -->
+      <div class="tab-panel" id="tabLibrary">
+        <div class="library-panel">
+          <div class="library-header">
+            <span class="library-count" id="libraryCount">0 itens guardados</span>
+            <button class="btn-link" id="btnSaveToLibrary">+ Guardar texto atual</button>
+          </div>
+          <ul class="library-list" id="libraryList">
+            <li class="library-empty" id="libraryEmpty">Nenhum texto guardado ainda.</li>
+          </ul>
         </div>
       </div>
 
       <!-- Table detection badge -->
       <div class="table-badge" id="tableBadge" hidden>
         📊 Tabela detetada — leitura adaptada com cabeçalhos
+      </div>
+
+      <!-- Reading info bar -->
+      <div class="reading-info" id="readingInfo" hidden>
+        <span id="wordCount"></span>
+        <span class="info-sep">·</span>
+        <span id="readingTime"></span>
+        <span class="info-sep">·</span>
+        <button class="btn-link btn-save-inline" id="btnSaveInline">guardar</button>
       </div>
 
       <!-- Text area -->
@@ -49,6 +119,14 @@
         <button class="btn-clear" id="btnClear" title="Limpar">✕</button>
       </div>
 
+      <!-- Kokoro loading indicator -->
+      <div class="kokoro-loading" id="kokoroLoading" hidden>
+        <div class="kokoro-loading-bar">
+          <div class="kokoro-loading-fill" id="kokoroLoadingFill"></div>
+        </div>
+        <span id="kokoroLoadingText">A carregar modelo de IA — apenas na primeira vez (~80 MB)...</span>
+      </div>
+
       <!-- Controls -->
       <div class="controls">
         <div class="controls-row">
@@ -56,28 +134,97 @@
           <button class="btn btn-pause" id="btnPause" disabled>⏸ Pausa</button>
           <button class="btn btn-stop" id="btnStop" disabled>⏹ Parar</button>
         </div>
-        <div class="settings">
-          <div class="setting-group">
-            <label for="voiceSelect">Voz</label>
-            <select id="voiceSelect"></select>
-          </div>
-          <div class="setting-group">
-            <label for="rateRange">Velocidade <span id="rateValue">1.0x</span></label>
-            <input type="range" id="rateRange" min="0.5" max="2" step="0.1" value="1" />
-          </div>
-          <div class="setting-group">
-            <label for="pitchRange">Tom <span id="pitchValue">1.0</span></label>
-            <input type="range" id="pitchRange" min="0.5" max="2" step="0.1" value="1" />
-          </div>
+
+        <!-- Progress -->
+        <div class="progress-bar-wrapper" id="progressWrapper">
+          <div class="progress-bar" id="progressBar"></div>
         </div>
-      </div>
+        <div class="status" id="status">Pronto</div>
 
-      <!-- Progress -->
-      <div class="progress-bar-wrapper" id="progressWrapper">
-        <div class="progress-bar" id="progressBar"></div>
-      </div>
+        <!-- Settings panel -->
+        <details class="settings-details" id="settingsDetails">
+          <summary class="settings-toggle">⚙ Definições</summary>
+          <div class="settings">
 
-      <div class="status" id="status">Pronto</div>
+            <!-- Engine selector -->
+            <div class="setting-group full-width">
+              <label>Motor de voz</label>
+              <div class="engine-selector">
+                <label class="engine-option">
+                  <input type="radio" name="engine" value="webspeech" id="engineWebSpeech" checked />
+                  <span class="engine-label">
+                    <span class="engine-name">🌐 Sistema</span>
+                    <span class="engine-desc">Vozes do browser, sem download</span>
+                  </span>
+                </label>
+                <label class="engine-option">
+                  <input type="radio" name="engine" value="kokoro" id="engineKokoro" />
+                  <span class="engine-label">
+                    <span class="engine-name">🤖 Kokoro AI</span>
+                    <span class="engine-desc">Alta qualidade, PT-BR, offline</span>
+                  </span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Voice selector (Web Speech) -->
+            <div class="setting-group" id="voiceGroup">
+              <label for="voiceSelect">Voz</label>
+              <select id="voiceSelect"></select>
+            </div>
+
+            <!-- Kokoro voice selector -->
+            <div class="setting-group" id="kokoroVoiceGroup" hidden>
+              <label for="kokoroVoiceSelect">Voz Kokoro</label>
+              <select id="kokoroVoiceSelect">
+                <option value="pf_dora">⭐ Dora (PT-BR, Feminino)</option>
+                <option value="pm_alex">⭐ Alex (PT-BR, Masculino)</option>
+                <option value="pm_santa">⭐ Santa (PT-BR, Masculino)</option>
+                <option value="af_heart">Heart (EN-US, Feminino)</option>
+                <option value="af_sky">Sky (EN-US, Feminino)</option>
+                <option value="af_bella">Bella (EN-US, Feminino)</option>
+                <option value="am_adam">Adam (EN-US, Masculino)</option>
+                <option value="am_michael">Michael (EN-US, Masculino)</option>
+                <option value="bf_emma">Emma (EN-GB, Feminino)</option>
+                <option value="bm_george">George (EN-GB, Masculino)</option>
+              </select>
+            </div>
+
+            <div class="setting-group">
+              <label for="rateRange">Velocidade <span id="rateValue">1.0x</span></label>
+              <input type="range" id="rateRange" min="0.25" max="4" step="0.05" value="1" />
+            </div>
+            <div class="setting-group">
+              <label for="pitchRange">Tom <span id="pitchValue">1.0</span></label>
+              <input type="range" id="pitchRange" min="0.5" max="2" step="0.1" value="1" />
+            </div>
+
+            <!-- WakeLock toggle -->
+            <div class="setting-group full-width">
+              <label class="toggle-label">
+                <input type="checkbox" id="wakeLockToggle" />
+                <span class="toggle-track"><span class="toggle-thumb"></span></span>
+                <span>Manter ecrã ligado durante leitura</span>
+              </label>
+            </div>
+          </div>
+        </details>
+
+        <!-- Pronunciation dictionary -->
+        <details class="settings-details">
+          <summary class="settings-toggle">📖 Dicionário de pronúncia</summary>
+          <div class="dict-panel">
+            <p class="dict-hint">Substitui palavras antes de ler. Útil para nomes próprios, siglas ou termos técnicos.</p>
+            <div class="dict-add-row">
+              <input type="text" id="dictWord" placeholder="Palavra original" class="dict-input" />
+              <span class="dict-arrow">→</span>
+              <input type="text" id="dictReplace" placeholder="Como ler" class="dict-input" />
+              <button class="btn-dict-add" id="btnDictAdd">+</button>
+            </div>
+            <ul class="dict-list" id="dictList"></ul>
+          </div>
+        </details>
+      </div>
     </main>
 
     <!-- Footer Nodeflow -->
@@ -88,10 +235,10 @@
     </footer>
   </div>
 
-  <!-- Libraries -->
+  <!-- Libraries (loaded before module script so globals are available) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-  <script src="app.js"></script>
+  <script type="module" src="app.js"></script>
 </body>
 </html>

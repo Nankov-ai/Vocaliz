@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "Vocaliz Reader",
+  "short_name": "Vocaliz",
+  "version": "1.0.0",
+  "description": "Envia texto selecionado ou página atual para a Vocaliz — lê em voz alta com IA",
+  "permissions": ["activeTab", "scripting"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Vocaliz Reader"
+  },
+  "icons": {
+    "16":  "icon16.svg",
+    "48":  "icon48.svg",
+    "128": "icon128.svg"
+  }
+}

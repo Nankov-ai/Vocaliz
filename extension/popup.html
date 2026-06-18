@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #0f0f13;
+      color: #e8e8f0;
+      width: 280px;
+      padding: 16px;
+    }
+
+    .logo-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .logo-row img { width: 22px; height: 22px; }
+
+    .logo-row h1 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+
+    .subtitle {
+      font-size: 0.72rem;
+      color: #7a7a9a;
+      margin-bottom: 14px;
+      line-height: 1.4;
+    }
+
+    .btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      padding: 11px 14px;
+      border: none;
+      border-radius: 10px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s;
+      margin-bottom: 8px;
+    }
+
+    .btn:active { transform: scale(0.97); }
+
+    .btn-primary { background: #7c6af7; color: #fff; }
+    .btn-primary:hover { background: #9585ff; }
+
+    .btn-secondary {
+      background: #22222f;
+      color: #e8e8f0;
+      border: 1.5px solid #2e2e42;
+    }
+    .btn-secondary:hover { background: #2e2e42; }
+
+    .btn-icon { font-size: 1rem; }
+
+    .status {
+      font-size: 0.75rem;
+      color: #7a7a9a;
+      text-align: center;
+      min-height: 18px;
+      margin-top: 8px;
+    }
+
+    .status.error { color: #f74f6a; }
+    .status.ok    { color: #4ff7a0; }
+
+    .divider {
+      border: none;
+      border-top: 1px solid #2e2e42;
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="logo-row">
+    <img src="../nodeflow_icon.svg" alt="" />
+    <h1>🔊 Vocaliz</h1>
+  </div>
+  <p class="subtitle">Seleciona texto em qualquer página e envia para a Vocaliz.</p>
+
+  <button class="btn btn-primary" id="btnSelection">
+    <span class="btn-icon">📝</span>
+    <span>Ler texto selecionado</span>
+  </button>
+
+  <button class="btn btn-secondary" id="btnPage">
+    <span class="btn-icon">📄</span>
+    <span>Ler página completa</span>
+  </button>
+
+  <hr class="divider" />
+
+  <button class="btn btn-secondary" id="btnOpen">
+    <span class="btn-icon">🔊</span>
+    <span>Abrir Vocaliz</span>
+  </button>
+
+  <p class="status" id="status"></p>
+
+  <script src="popup.js"></script>
+</body>
+</html>

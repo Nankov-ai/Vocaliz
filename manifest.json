@@ -1,0 +1,38 @@
+{
+  "name": "Vocaliz",
+  "short_name": "Vocaliz",
+  "description": "Lê qualquer texto em voz alta — TTS avançado com vozes de IA",
+  "start_url": "/Vocaliz/",
+  "scope": "/Vocaliz/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0f0f13",
+  "theme_color": "#7c6af7",
+  "lang": "pt",
+  "icons": [
+    {
+      "src": "nodeflow_icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "share_target": {
+    "action": "/Vocaliz/",
+    "method": "GET",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  },
+  "shortcuts": [
+    {
+      "name": "Ler texto",
+      "short_name": "Ler",
+      "description": "Abre a Vocaliz para leitura rápida",
+      "url": "/Vocaliz/",
+      "icons": [{ "src": "nodeflow_icon.svg", "sizes": "any" }]
+    }
+  ]
+}
