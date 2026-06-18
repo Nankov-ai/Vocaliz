@@ -4,6 +4,9 @@
   padding: 0;
 }
 
+/* Ensure [hidden] always works even with CSS resets */
+[hidden] { display: none !important; }
+
 :root {
   --bg: #0f0f13;
   --surface: #1a1a24;
@@ -29,7 +32,11 @@ body {
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  padding: 32px 16px;
+  padding: 20px 12px;
+}
+
+@media (min-width: 600px) {
+  body { padding: 32px 16px; }
 }
 
 .container {
@@ -556,8 +563,24 @@ header h1 {
   border-color: var(--danger);
 }
 
-@media (max-width: 520px) {
-  .settings { grid-template-columns: 1fr; }
+/* Mobile: 1 column always; desktop: 3 columns */
+@media (max-width: 600px) {
+  .settings {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 12px;
+  }
+  .settings .full-width { grid-column: 1; }
+
+  .engine-option { min-width: 0; }
+
+  .controls-row { gap: 6px; }
+  .btn { padding: 10px 12px; font-size: 0.85rem; }
+
+  .input-tab { font-size: 0.72rem; padding: 7px 2px; }
+
+  header h1 { font-size: 1.6rem; }
+  .subtitle  { font-size: 0.82rem; }
 }
 
 .setting-group {
@@ -574,6 +597,8 @@ header h1 {
   letter-spacing: 0.5px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  gap: 6px;
 }
 
 .setting-group label span {
@@ -684,7 +709,7 @@ input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.2); }
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 12px 16px;
+  padding: 11px 14px;
   cursor: pointer;
   font-size: 0.85rem;
   font-weight: 600;
@@ -714,14 +739,17 @@ input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.2); }
 
 /* ── Engine selector ────────────────────────── */
 .engine-selector {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+@media (max-width: 360px) {
+  .engine-selector { grid-template-columns: 1fr; }
 }
 
 .engine-option {
-  flex: 1;
-  min-width: 140px;
+  min-width: 0;
   display: flex;
   align-items: flex-start;
   gap: 10px;
@@ -764,6 +792,12 @@ input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.2); }
   cursor: pointer;
   font-size: 0.82rem;
   color: var(--text-muted);
+  flex-wrap: nowrap;
+}
+
+.toggle-label span:last-child {
+  flex: 1;
+  line-height: 1.3;
 }
 
 .toggle-label input { display: none; }
