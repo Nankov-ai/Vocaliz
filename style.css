@@ -563,22 +563,11 @@ header h1 {
   border-color: var(--danger);
 }
 
-/* Mobile: 1 column always; desktop: 3 columns */
+/* Mobile-first responsive tweaks */
 @media (max-width: 600px) {
-  .settings {
-    grid-template-columns: 1fr;
-    gap: 12px;
-    padding: 12px;
-  }
-  .settings .full-width { grid-column: 1; }
-
-  .engine-option { min-width: 0; }
-
   .controls-row { gap: 6px; }
   .btn { padding: 10px 12px; font-size: 0.85rem; }
-
   .input-tab { font-size: 0.72rem; padding: 7px 2px; }
-
   header h1 { font-size: 1.6rem; }
   .subtitle  { font-size: 0.82rem; }
 }
@@ -727,12 +716,21 @@ input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.2); }
   color: var(--text);
 }
 
+/* Mobile-first: 1 column base, 3 columns on wider screens */
 .settings {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 14px;
-  padding: 16px;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  padding: 12px;
   background: var(--surface);
+}
+
+@media (min-width: 600px) {
+  .settings {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+    padding: 16px;
+  }
 }
 
 .settings .full-width { grid-column: 1 / -1; }
@@ -742,10 +740,6 @@ input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.2); }
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 8px;
-}
-
-@media (max-width: 360px) {
-  .engine-selector { grid-template-columns: 1fr; }
 }
 
 .engine-option {
